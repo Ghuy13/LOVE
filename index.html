@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Love Letter 💌</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap" rel="stylesheet">
+    <style>
+        body {
+            overflow-x: hidden;
+            background: linear-gradient(to bottom, #fff0f3, #ffe3e3, #ffd6d9);
+        }
+
+        /* Envelope */
+        .envelope {
+            position: relative;
+            width: 520px;
+            height: 340px;
+            background: #ffcfd2;
+            border-radius: 16px;
+            box-shadow: 0 10px 26px rgba(0, 0, 0, 0.2);
+            cursor: pointer;
+            perspective: 1000px;
+            transition: transform .6s ease;
+        }
+
+        .envelope:hover {
+            transform: scale(1.02);
+        }
+
+        .flap {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 50%;
+            background: linear-gradient(to bottom, #ffb3c1, #ffcfd2);
+            clip-path: polygon(0 0, 100% 0, 50% 100%);
+            transform-origin: top;
+            transition: transform 1s ease;
+        }
+
+        .envelope.open .flap {
+            transform: rotateX(180deg);
+        }
+
+        .seal {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 74px;
+            height: 74px;
+            background: radial-gradient(circle, #ff4d6d, #c9184a);
+            border-radius: 50%;
+            box-shadow: 0 0 20px rgba(255, 90, 120, 0.6);
+            color: #fff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 30px;
+            transition: opacity .3s ease;
+        }
+
+        .envelope.open .seal {
+            opacity: 0;
+        }
+
+        .flash {
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(circle, #ffffffa0 0%, transparent 70%);
+            opacity: 0;
+            border-radius: 16px;
+            pointer-events: none;
+        }
+
+        .envelope.open .flash {
+            animation: flashAnim 1s ease;
+        }
+
+        @keyframes flashAnim {
+            0% {
+                opacity: 0;
+            }
+
+            20% {
+                opacity: 1;
+            }
+
+            100% {
+                opacity: 0;
+            }
+        }
+
+        /* Letter panel */
+        .letter {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 0;
+            opacity: 0;
+            transform: translateY(40px);
+            background: #fffafc;
+            border-radius: 0 0 16px 16px;
+            overflow: hidden;
+            /* transition for CLOSE (no delay) */
+            transition: height .9s ease, opacity .5s ease, transform .9s ease;
+        }
+
+        /* transition for OPEN (staggered a chút) */
+        .envelope.open .letter {
+            height: 460px;
+            opacity: 1;
+            transform: translateY(0);
+            transition: height 1s ease .15s, opacity .6s ease .15s, transform 1s ease .15s;
+        }
+
+        /* Decorative frame */
+        .frame {
+            height: 100%;
+            padding: 2px;
+            border-radius: 14px;
+            background: linear-gradient(135deg, #ffd1dc, #f8a1b6, #f7c5d3, #ffd9e2) border-box;
+        }
+
+        .frame-inner {
+            height: 100%;
+            border-radius: 12px;
+            overflow: hidden;
+            background: radial-gradient(1000px 200px at 50% -50%, #fff 0, #fff0 60%), linear-gradient(180deg, #fffdfd, #fff7fb);
+            box-shadow: inset 0 8px 30px rgba(255, 182, 193, 0.25);
+        }
+
+        /* Content reveal/retract (THIS makes the inner part slide/fade in/out) */
+        .content {
+            height: 100%;
+            overflow-y: auto;
+            padding: 26px 28px 18px;
+            scroll-behavior: smooth;
+            transform: translateY(24px);
+            opacity: 0;
+            transition: transform .5s ease, opacity .5s ease;
+        }
+
+        .envelope.open .content {
+            transform: translateY(0);
+            opacity: 1;
+            transition: transform .6s ease .15s, opacity .6s ease .15s;
+        }
+
+        .content::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        .content::-webkit-scrollbar-thumb {
+            background: #f59eb5;
+            border-radius: 8px;
+        }
+
+        h1 {
+            font-family: 'Segoe UI', Arial, sans-serif;
+        }
+
+        /* Typography */
+        h2 {
+            font-family: 'Segoe UI', Arial, sans-serif;
+            font-size: 34px;
+            color: #c9184a;
+        }
+
+        p {
+            font-family: 'Segoe UI', Arial, sans-serif;
+            font-size: 20px;
+            line-height: 1.6;
+            color: #6b0210;
+            text-align: justify;
+        }
+
+        .signature {
+            font-family: 'Great Vibes', cursive;
+            font-size: 26px;
+            color: #c9184a;
+        }
+
+        /* Photo strip */
+        .photo {
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 12px 24px rgba(0, 0, 0, 0.12);
+            transition: transform .35s ease;
+        }
+
+        .photo:hover {
+            transform: scale(1.04);
+        }
+
+        /* Floral decoration */
+        .floral-row {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+            align-items: center;
+            opacity: .9;
+            flex-wrap: wrap;
+        }
+
+        .flower {
+            width: 28px;
+            height: 28px;
+            filter: drop-shadow(0 2px 4px rgba(0, 0, 0, .15));
+        }
+
+        /* Floating hearts */
+        @keyframes floatHeart {
+            0% {
+                transform: translateY(100%) scale(.85);
+                opacity: 0;
+            }
+
+            25% {
+                opacity: .85;
+            }
+
+            100% {
+                transform: translateY(-120%) scale(1.2);
+                opacity: 0;
+            }
+        }
+
+        .heart {
+            position: absolute;
+            bottom: -10%;
+            font-size: 22px;
+            animation: floatHeart var(--t) linear infinite;
+            left: var(--x);
+        }
+
+        /* Glow */
+        .glow {
+            position: absolute;
+            width: 560px;
+            height: 560px;
+            background: radial-gradient(circle, #ffc2d1, transparent 70%);
+            top: -200px;
+            left: 50%;
+            transform: translateX(-50%);
+            filter: blur(90px);
+            z-index: -1;
+        }
+    </style>
+</head>
+
+<body class="flex flex-col items-center justify-center min-h-screen">
+
+    <div class="glow"></div>
+    <!-- Background image mờ -->
+    <div style="position:fixed; inset:0; z-index:-2; pointer-events:none;">
+        <img src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?q=80&w=1600&auto=format&fit=crop"
+            alt="bg" style="width:100vw; height:100vh; object-fit:cover; opacity:0.18; filter: blur(6px);" />
+    </div>
+    <h1 class="text-3xl font-bold text-rose-800 mb-6 text-center">HAPPY WOMEN DAY 💌</h1>
+
+    <div class="envelope" id="envelope" aria-label="Bấm để mở/đóng bức thư">
+        <div class="flap"></div>
+        <div class="flash"></div>
+        <div class="seal">💖</div>
+
+        <div class="letter">
+            <div class="frame">
+                <div class="frame-inner relative">
+                    <div class="content">
+                        <h2>Gửi đến Bé Iu của Huy ❤️</h2>
+                        <p>
+                            Chúc mừng ngày Phụ Nữ Việt Nam 20/10.
+                            Anh chúc bé có một này tốt đẹp và hạnh phúc nhé mọi điều tốt đẹp sẽ đến với bé.
+                            Chúc bé ngày càng xinh đẹp và được Anh iu iu bé nhiều hơn nhoa.
+
+                        </p>
+
+                        <p class="mt-2">
+                            Anh mãi iu bé dù em có lì đi chăng nữa chỉ iu mình em thuiii
+                            Ai Lớp Du Tường Vyy❤️❤️❤️
+                        </p>
+                        <div class="grid gap-4 sm:grid-cols-3 my-5">
+                            <img class="photo h-40 w-full object-cover" src="img/anh1.jpg" alt="Kỷ niệm 1">
+                            <img class="photo h-40 w-full object-cover" src="img/anh2.jpg" alt="Kỷ niệm 2">
+                            <img class="photo h-40 w-full object-cover" src="img/anh3.jpg" alt="Kỷ niệm 3">
+                        </div>
+                        <div class="mt-6 mb-2 floral-row" aria-hidden="true">
+                            <svg class="flower" viewBox="0 0 24 24">
+                                <path fill="#e11d48"
+                                    d="M12 4c1.7-3 6 0 4 3 3-2 6 2 3 4 3 1.7 0 6-3 4 2 3-2 6-4 3-1.7 3-6 0-4-3-3 2-6-2-3-4-3-1.7 0-6 3-4-2-3 2-6 4-3Z" />
+                                <circle cx="12" cy="12" r="2.5" fill="#fbbf24" />
+                            </svg>
+                            <svg class="flower" viewBox="0 0 24 24">
+                                <path fill="#e11d48"
+                                    d="M12 4c1.7-3 6 0 4 3 3-2 6 2 3 4 3 1.7 0 6-3 4 2 3-2 6-4 3-1.7 3-6 0-4-3-3 2-6-2-3-4-3-1.7 0-6 3-4-2-3 2-6 4-3Z" />
+                                <circle cx="12" cy="12" r="2.5" fill="#fbbf24" />
+                            </svg>
+                            <svg class="flower" viewBox="0 0 24 24">
+                                <path fill="#e11d48"
+                                    d="M12 4c1.7-3 6 0 4 3 3-2 6 2 3 4 3 1.7 0 6-3 4 2 3-2 6-4 3-1.7 3-6 0-4-3-3 2-6-2-3-4-3-1.7 0-6 3-4-2-3 2-6 4-3Z" />
+                                <circle cx="12" cy="12" r="2.5" fill="#fbbf24" />
+                            </svg>
+                            <svg class="flower" viewBox="0 0 24 24">
+                                <path fill="#e11d48"
+                                    d="M12 4c1.7-3 6 0 4 3 3-2 6 2 3 4 3 1.7 0 6-3 4 2 3-2 6-4 3-1.7 3-6 0-4-3-3 2-6-2-3-4-3-1.7 0-6 3-4-2-3 2-6 4-3Z" />
+                                <circle cx="12" cy="12" r="2.5" fill="#fbbf24" />
+                            </svg>
+                            <svg class="flower" viewBox="0 0 24 24">
+                                <path fill="#e11d48"
+                                    d="M12 4c1.7-3 6 0 4 3 3-2 6 2 3 4 3 1.7 0 6-3 4 2 3-2 6-4 3-1.7 3-6 0-4-3-3 2-6-2-3-4-3-1.7 0-6 3-4-2-3 2-6 4-3Z" />
+                                <circle cx="12" cy="12" r="2.5" fill="#fbbf24" />
+                            </svg>
+                        </div>
+
+                        <p class="text-right text-rose-700 mb-1">— Anh Huy siu đẹp trai ❤️</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer class="text-xs text-rose-600/70 mt-8"></footer>
+
+    <script>
+        // Floating hearts
+        for (let i = 0; i < 28; i++) {
+            const h = document.createElement("div");
+            h.className = "heart"; h.textContent = "❤️";
+            h.style.setProperty("--x", Math.random() * 100 + "%");
+            h.style.setProperty("--t", 5 + Math.random() * 6 + "s");
+            h.style.animationDelay = Math.random() * 5 + "s";
+            document.body.appendChild(h);
+        }
+
+        const env = document.getElementById("envelope");
+        let opened = false;
+
+        function openLetter() {
+            if (!opened) {
+                env.classList.add("open");
+                opened = true;
+                // sparkle nhẹ lúc mở
+                setTimeout(() => createSparkles(env), 300);
+                // Hiệu ứng trái tim bay lên
+                createFlyingHearts(env);
+            }
+            // Hiệu ứng trái tim bay lên khi mở thư
+            function createFlyingHearts(el) {
+                for (let i = 0; i < 14; i++) {
+                    const heart = document.createElement("div");
+                    heart.textContent = "💖";
+                    heart.style.position = "absolute";
+                    heart.style.left = (45 + Math.random() * 10) + "%";
+                    heart.style.top = "55%";
+                    heart.style.fontSize = (22 + Math.random() * 10) + "px";
+                    heart.style.opacity = "0.85";
+                    heart.style.pointerEvents = "none";
+                    heart.style.zIndex = "20";
+                    el.appendChild(heart);
+                    const x = (Math.random() - 0.5) * 120;
+                    const y = -120 - Math.random() * 80;
+                    heart.animate([
+                        { transform: `translate(0,0) scale(1)`, opacity: 0.85 },
+                        { transform: `translate(${x}px,${y}px) scale(1.3)`, opacity: 0 }
+                    ], {
+                        duration: 1200 + Math.random() * 400,
+                        easing: "cubic-bezier(.5,-0.2,.7,1.2)"
+                    });
+                    setTimeout(() => heart.remove(), 1400);
+                }
+            }
+        }
+        function closeLetter() {
+            if (opened) {
+                // chỉ cần bỏ class 'open' là: 
+                // - flap gập lại
+                // - .letter hạ chiều cao về 0 (thu vào)
+                // - .content tự mờ dần + trượt xuống (do CSS chuyển trạng thái)
+                env.classList.remove("open");
+                opened = false;
+            }
+        }
+
+        // Click envelope để toggle mở/đóng (kể cả khi click vào nội dung)
+        env.addEventListener("click", () => {
+            opened ? closeLetter() : openLetter();
+        });
+
+        // Sparkles
+        function createSparkles(el) {
+            for (let i = 0; i < 22; i++) {
+                const s = document.createElement("div");
+                s.style.position = "absolute"; s.style.width = "6px"; s.style.height = "6px";
+                s.style.borderRadius = "50%";
+                s.style.background = `hsl(${Math.random() * 360},80%,60%)`;
+                s.style.left = "50%"; s.style.top = "40%";
+                s.style.transform = `translate(-50%,-50%)`;
+                s.style.pointerEvents = "none"; s.style.opacity = "1";
+                el.appendChild(s);
+                const x = (Math.random() - 0.5) * 220, y = (Math.random() - 0.5) * 220;
+                s.animate(
+                    [{ transform: `translate(-50%,-50%)`, opacity: 1 },
+                    { transform: `translate(${x}%,${y}%) scale(0)`, opacity: 0 }],
+                    { duration: 1000 + Math.random() * 500, easing: "ease-out" }
+                );
+                setTimeout(() => s.remove(), 1500);
+            }
+        }
+    </script>
+</body>
+
+</html>
