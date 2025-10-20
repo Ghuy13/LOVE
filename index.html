@@ -2,134 +2,17 @@
 <html lang="vi">
 
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
     <title>Love Letter 💌</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap" rel="stylesheet">
     <style>
-        /* Responsive cho iPhone 13 và mobile */
-        @media (max-width: 430px) {
-            .envelope {
-                width: 98vw;
-
-                @media (max-width: 430px) {
-                    .envelope {
-                        width: 98vw;
-                        max-width: 340px;
-                        height: 180px;
-                    }
-
-                    .flap {
-                        height: 44%;
-                    }
-
-                    .letter {
-                        max-height: 260px;
-                        border-radius: 0 0 10px 10px;
-                    }
-
-                    .envelope.open .letter {
-                        height: 260px;
-                    }
-
-                    .frame-inner,
-                    .frame {
-                        border-radius: 8px;
-                    }
-
-                    .content {
-                        padding: 8px 2px 6px;
-                        font-size: 13px;
-                    }
-
-                    h2 {
-                        font-size: 18px;
-                    }
-
-                    p {
-                        font-size: 13px;
-                    }
-
-                    .grid {
-                        grid-template-columns: 1fr !important;
-                        gap: 8px !important;
-                    }
-
-                    .photo {
-                        height: 140px !important;
-                        width: 100% !important;
-                        border-radius: 10px !important;
-                        object-fit: cover !important;
-                        display: block;
-                        margin: 0 auto;
-                    }
-
-                    .flower {
-                        width: 14px;
-                        height: 14px;
-                    }
-                }
-
-                width: 14px;
-                height: 14px;
-            }
-
-            .grid {
-                grid-template-columns: 1fr !important;
-            }
-        }
-
-        @media (max-width: 480px) {
-            .envelope {
-                width: 98vw;
-                max-width: 370px;
-                height: 220px;
-                min-width: 0;
-            }
-
-            .flap {
-                height: 44%;
-            }
-
-            .letter {
-                height: 0;
-                min-height: 0;
-                max-height: 320px;
-                border-radius: 0 0 12px 12px;
-            }
-
-            .envelope.open .letter {
-                height: 320px;
-            }
-
-            .frame-inner,
-            .frame {
-                border-radius: 10px;
-            }
-
-            .content {
-                padding: 14px 8px 10px;
-                font-size: 16px;
-            }
-
-            h2 {
-                font-size: 22px;
-            }
-
-            p {
-                font-size: 15px;
-            }
-
-            .photo {
-                height: 80px !important;
-                border-radius: 8px;
-            }
-
-            .flower {
-                width: 18px;
-                height: 18px;
-            }
+        /* Reset ảnh để không bị kéo giãn */
+        img {
+            max-width: 100%;
+            height: auto;
+            display: block;
         }
 
         body {
@@ -144,7 +27,7 @@
             height: 340px;
             background: #ffcfd2;
             border-radius: 16px;
-            box-shadow: 0 10px 26px rgba(0, 0, 0, 0.2);
+            box-shadow: 0 10px 26px rgba(0, 0, 0, .2);
             cursor: pointer;
             perspective: 1000px;
             transition: transform .6s ease;
@@ -179,7 +62,7 @@
             height: 74px;
             background: radial-gradient(circle, #ff4d6d, #c9184a);
             border-radius: 50%;
-            box-shadow: 0 0 20px rgba(255, 90, 120, 0.6);
+            box-shadow: 0 0 20px rgba(255, 90, 120, .6);
             color: #fff;
             display: flex;
             align-items: center;
@@ -207,15 +90,15 @@
 
         @keyframes flashAnim {
             0% {
-                opacity: 0;
+                opacity: 0
             }
 
             20% {
-                opacity: 1;
+                opacity: 1
             }
 
             100% {
-                opacity: 0;
+                opacity: 0
             }
         }
 
@@ -231,11 +114,9 @@
             background: #fffafc;
             border-radius: 0 0 16px 16px;
             overflow: hidden;
-            /* transition for CLOSE (no delay) */
             transition: height .9s ease, opacity .5s ease, transform .9s ease;
         }
 
-        /* transition for OPEN (staggered a chút) */
         .envelope.open .letter {
             height: 460px;
             opacity: 1;
@@ -255,14 +136,16 @@
             height: 100%;
             border-radius: 12px;
             overflow: hidden;
-            background: radial-gradient(1000px 200px at 50% -50%, #fff 0, #fff0 60%), linear-gradient(180deg, #fffdfd, #fff7fb);
-            box-shadow: inset 0 8px 30px rgba(255, 182, 193, 0.25);
+            background: radial-gradient(1000px 200px at 50% -50%, #fff 0, #fff0 60%),
+                linear-gradient(180deg, #fffdfd, #fff7fb);
+            box-shadow: inset 0 8px 30px rgba(255, 182, 193, .25);
         }
 
-        /* Content reveal/retract (THIS makes the inner part slide/fade in/out) */
+        /* Content */
         .content {
             height: 100%;
             overflow-y: auto;
+            -webkit-overflow-scrolling: touch;
             padding: 26px 28px 18px;
             scroll-behavior: smooth;
             transform: translateY(24px);
@@ -285,11 +168,11 @@
             border-radius: 8px;
         }
 
+        /* Typography */
         h1 {
             font-family: 'Segoe UI', Arial, sans-serif;
         }
 
-        /* Typography */
         h2 {
             font-family: 'Segoe UI', Arial, sans-serif;
             font-size: 34px;
@@ -310,15 +193,18 @@
             color: #c9184a;
         }
 
-        /* Photo strip */
+        /* Ảnh kỷ niệm */
         .photo {
+            width: 100%;
+            aspect-ratio: 4 / 3;
+            /* Giữ tỉ lệ đẹp trên iPhone */
+            height: auto !important;
+            /* Gỡ ép chiều cao từ Tailwind h-40 */
+            object-fit: cover !important;
             border-radius: 16px;
             overflow: hidden;
-            box-shadow: 0 12px 24px rgba(0, 0, 0, 0.12);
+            box-shadow: 0 12px 24px rgba(0, 0, 0, .12);
             transition: transform .35s ease;
-            width: 100%;
-            object-fit: cover;
-            aspect-ratio: 3/2;
             display: block;
         }
 
@@ -326,7 +212,7 @@
             transform: scale(1.04);
         }
 
-        /* Floral decoration */
+        /* Hoa */
         .floral-row {
             display: flex;
             gap: 10px;
@@ -342,7 +228,7 @@
             filter: drop-shadow(0 2px 4px rgba(0, 0, 0, .15));
         }
 
-        /* Floating hearts */
+        /* Tim bay nền */
         @keyframes floatHeart {
             0% {
                 transform: translateY(100%) scale(.85);
@@ -367,7 +253,7 @@
             left: var(--x);
         }
 
-        /* Glow */
+        /* Glow nền */
         .glow {
             position: absolute;
             width: 560px;
@@ -379,17 +265,106 @@
             filter: blur(90px);
             z-index: -1;
         }
+
+        /* ===============================
+       MOBILE TUNING (iPhone 13 ~390px)
+       =============================== */
+        @media (max-width: 430px) {
+            .envelope {
+                width: 96vw;
+                max-width: 390px;
+                /* vừa iPhone 13 */
+                height: 200px;
+                /* độ cao bì thư khi đóng */
+            }
+
+            .flap {
+                height: 44%;
+            }
+
+            .letter {
+                height: 0;
+                min-height: 0;
+                max-height: 72vh;
+                /* cho phép kéo dài tối đa theo màn hình */
+                border-radius: 0 0 12px 12px;
+            }
+
+            .envelope.open .letter {
+                height: min(440px, 72vh);
+            }
+
+            .frame,
+            .frame-inner {
+                border-radius: 10px;
+            }
+
+            .content {
+                padding: 14px 10px 12px;
+                font-size: 16px;
+            }
+
+            h2 {
+                font-size: 22px;
+            }
+
+            p {
+                font-size: 15px;
+            }
+
+            /* Lưới 1 cột cho ảnh */
+            .grid {
+                grid-template-columns: 1fr !important;
+                gap: 10px !important;
+            }
+
+            /* Ảnh: bo tròn nhỏ hơn, giữ tỉ lệ 4:3 */
+            .photo {
+                border-radius: 12px !important;
+                aspect-ratio: 4 / 3;
+                height: auto !important;
+                width: 100% !important;
+                object-fit: cover !important;
+                margin: 0 auto;
+            }
+
+            .flower {
+                width: 18px;
+                height: 18px;
+            }
+        }
+
+        /* Thêm lớp hỗ trợ màn nhỏ hơn 360px (máy cũ) */
+        @media (max-width: 360px) {
+            .envelope {
+                height: 184px;
+            }
+
+            .envelope.open .letter {
+                height: min(400px, 70vh);
+            }
+
+            h2 {
+                font-size: 20px;
+            }
+
+            p {
+                font-size: 14px;
+            }
+        }
     </style>
 </head>
 
 <body class="flex flex-col items-center justify-center min-h-screen">
 
     <div class="glow"></div>
+
     <!-- Background image mờ -->
     <div style="position:fixed; inset:0; z-index:-2; pointer-events:none;">
         <img src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?q=80&w=1600&auto=format&fit=crop"
             alt="bg" style="width:100vw; height:100vh; object-fit:cover; opacity:0.18; filter: blur(6px);" />
     </div>
+
     <h1 class="text-3xl font-bold text-rose-800 mb-6 text-center">HAPPY WOMEN DAY 💌</h1>
 
     <div class="envelope" id="envelope" aria-label="Bấm để mở/đóng bức thư">
@@ -406,18 +381,19 @@
                             Chúc mừng ngày Phụ Nữ Việt Nam 20/10.
                             Anh chúc bé có một này tốt đẹp và hạnh phúc nhé mọi điều tốt đẹp sẽ đến với bé.
                             Chúc bé ngày càng xinh đẹp và được Anh iu iu bé nhiều hơn nhoa.
-
                         </p>
-
                         <p class="mt-2">
                             Anh mãi iu bé dù em có lì đi chăng nữa chỉ iu mình em thuiii
                             Ai Lớp Du Tường Vyy❤️❤️❤️
                         </p>
+
+                        <!-- LƯU Ý: bỏ h-40 để không ép chiều cao ảnh -->
                         <div class="grid gap-4 sm:grid-cols-3 my-5">
-                            <img class="photo h-40 w-full object-cover" src="img/anh1.jpg" alt="Kỷ niệm 1">
-                            <img class="photo h-40 w-full object-cover" src="img/anh2.jpg" alt="Kỷ niệm 2">
-                            <img class="photo h-40 w-full object-cover" src="img/anh3.jpg" alt="Kỷ niệm 3">
+                            <img class="photo" src="img/anh1.jpg" alt="Kỷ niệm 1">
+                            <img class="photo" src="img/anh2.jpg" alt="Kỷ niệm 2">
+                            <img class="photo" src="img/anh3.jpg" alt="Kỷ niệm 3">
                         </div>
+
                         <div class="mt-6 mb-2 floral-row" aria-hidden="true">
                             <svg class="flower" viewBox="0 0 24 24">
                                 <path fill="#e11d48"
@@ -456,7 +432,7 @@
     <footer class="text-xs text-rose-600/70 mt-8"></footer>
 
     <script>
-        // Floating hearts
+        // Tim nền
         for (let i = 0; i < 28; i++) {
             const h = document.createElement("div");
             h.className = "heart"; h.textContent = "❤️";
@@ -473,12 +449,9 @@
             if (!opened) {
                 env.classList.add("open");
                 opened = true;
-                // sparkle nhẹ lúc mở
                 setTimeout(() => createSparkles(env), 300);
-                // Hiệu ứng trái tim bay lên
                 createFlyingHearts(env);
             }
-            // Hiệu ứng trái tim bay lên khi mở thư
             function createFlyingHearts(el) {
                 for (let i = 0; i < 14; i++) {
                     const heart = document.createElement("div");
@@ -493,45 +466,31 @@
                     el.appendChild(heart);
                     const x = (Math.random() - 0.5) * 120;
                     const y = -120 - Math.random() * 80;
-                    heart.animate([
-                        { transform: `translate(0,0) scale(1)`, opacity: 0.85 },
-                        { transform: `translate(${x}px,${y}px) scale(1.3)`, opacity: 0 }
-                    ], {
-                        duration: 1200 + Math.random() * 400,
-                        easing: "cubic-bezier(.5,-0.2,.7,1.2)"
-                    });
+                    heart.animate(
+                        [{ transform: `translate(0,0) scale(1)`, opacity: 0.85 },
+                        { transform: `translate(${x}px,${y}px) scale(1.3)`, opacity: 0 }],
+                        { duration: 1200 + Math.random() * 400, easing: "cubic-bezier(.5,-0.2,.7,1.2)" }
+                    );
                     setTimeout(() => heart.remove(), 1400);
                 }
             }
         }
         function closeLetter() {
             if (opened) {
-                // chỉ cần bỏ class 'open' là: 
-                // - flap gập lại
-                // - .letter hạ chiều cao về 0 (thu vào)
-                // - .content tự mờ dần + trượt xuống (do CSS chuyển trạng thái)
                 env.classList.remove("open");
                 opened = false;
             }
         }
+        env.addEventListener("click", () => { opened ? closeLetter() : openLetter(); });
 
-        // Click envelope để toggle mở/đóng (kể cả khi click vào nội dung)
-        env.addEventListener("click", () => {
-            opened ? closeLetter() : openLetter();
-        });
-
-        // Sparkles
         function createSparkles(el) {
             for (let i = 0; i < 22; i++) {
                 const s = document.createElement("div");
                 s.style.position = "absolute"; s.style.width = "6px"; s.style.height = "6px";
-                s.style.borderRadius = "50%";
-                s.style.background = `hsl(${Math.random() * 360},80%,60%)`;
-                s.style.left = "50%"; s.style.top = "40%";
-                s.style.transform = `translate(-50%,-50%)`;
-                s.style.pointerEvents = "none"; s.style.opacity = "1";
-                el.appendChild(s);
-                const x = (Math.random() - 0.5) * 220, y = (Math.random() - 0.5) * 220;
+                s.style.borderRadius = "50%"; s.style.background = `hsl(${Math.random() * 360},80%,60%)`;
+                s.style.left = "50%"; s.style.top = "40%"; s.style.transform = `translate(-50%,-50%)`;
+                s.style.pointerEvents = "none"; s.style.opacity = "1"; el.appendChild(s);
+                const x = (Math.random() - .5) * 220, y = (Math.random() - .5) * 220;
                 s.animate(
                     [{ transform: `translate(-50%,-50%)`, opacity: 1 },
                     { transform: `translate(${x}%,${y}%) scale(0)`, opacity: 0 }],
