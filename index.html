@@ -12,47 +12,65 @@
         @media (max-width: 430px) {
             .envelope {
                 width: 98vw;
-                max-width: 340px;
-                height: 180px;
-            }
 
-            .flap {
-                height: 44%;
-            }
+                @media (max-width: 430px) {
+                    .envelope {
+                        width: 98vw;
+                        max-width: 340px;
+                        height: 180px;
+                    }
 
-            .letter {
-                max-height: 260px;
-                border-radius: 0 0 10px 10px;
-            }
+                    .flap {
+                        height: 44%;
+                    }
 
-            .envelope.open .letter {
-                height: 260px;
-            }
+                    .letter {
+                        max-height: 260px;
+                        border-radius: 0 0 10px 10px;
+                    }
 
-            .frame-inner,
-            .frame {
-                border-radius: 8px;
-            }
+                    .envelope.open .letter {
+                        height: 260px;
+                    }
 
-            .content {
-                padding: 8px 4px 6px;
-                font-size: 13px;
-            }
+                    .frame-inner,
+                    .frame {
+                        border-radius: 8px;
+                    }
 
-            h2 {
-                font-size: 18px;
-            }
+                    .content {
+                        padding: 8px 2px 6px;
+                        font-size: 13px;
+                    }
 
-            p {
-                font-size: 13px;
-            }
+                    h2 {
+                        font-size: 18px;
+                    }
 
-            .photo {
-                height: 110px !important;
-                border-radius: 6px;
-            }
+                    p {
+                        font-size: 13px;
+                    }
 
-            .flower {
+                    .grid {
+                        grid-template-columns: 1fr !important;
+                        gap: 8px !important;
+                    }
+
+                    .photo {
+                        height: 140px !important;
+                        width: 100% !important;
+                        border-radius: 10px !important;
+                        object-fit: cover !important;
+                        display: block;
+                        margin: 0 auto;
+                    }
+
+                    .flower {
+                        width: 14px;
+                        height: 14px;
+                    }
+                }
+
                 width: 14px;
                 height: 14px;
             }
