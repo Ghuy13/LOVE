@@ -8,7 +8,6 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap" rel="stylesheet">
     <style>
-        /* Responsive cho iPhone 13 và mobile */
         @media (max-width: 430px) {
             .envelope {
                 width: 98vw;
@@ -142,7 +141,6 @@
             background: linear-gradient(to bottom, #fff0f3, #ffe3e3, #ffd6d9);
         }
 
-        /* Envelope */
         .envelope {
             position: relative;
             width: 520px;
@@ -224,7 +222,6 @@
             }
         }
 
-        /* Letter panel */
         .letter {
             position: absolute;
             bottom: 0;
@@ -236,11 +233,9 @@
             background: #fffafc;
             border-radius: 0 0 16px 16px;
             overflow: hidden;
-            /* transition for CLOSE (no delay) */
             transition: height .9s ease, opacity .5s ease, transform .9s ease;
         }
 
-        /* transition for OPEN (staggered a chút) */
         .envelope.open .letter {
             height: 460px;
             opacity: 1;
@@ -248,7 +243,6 @@
             transition: height 1s ease .15s, opacity .6s ease .15s, transform 1s ease .15s;
         }
 
-        /* Decorative frame */
         .frame {
             height: 100%;
             padding: 2px;
@@ -264,7 +258,6 @@
             box-shadow: inset 0 8px 30px rgba(255, 182, 193, 0.25);
         }
 
-        /* Content reveal/retract (THIS makes the inner part slide/fade in/out) */
         .content {
             height: 100%;
             overflow-y: auto;
@@ -294,7 +287,6 @@
             font-family: 'Segoe UI', Arial, sans-serif;
         }
 
-        /* Typography */
         h2 {
             font-family: 'Segoe UI', Arial, sans-serif;
             font-size: 34px;
@@ -315,7 +307,6 @@
             color: #c9184a;
         }
 
-        /* Photo strip */
         .photo {
             border-radius: 16px;
             overflow: hidden;
@@ -334,7 +325,6 @@
             transform: scale(1.04);
         }
 
-        /* Floral decoration */
         .floral-row {
             display: flex;
             gap: 10px;
@@ -350,7 +340,6 @@
             filter: drop-shadow(0 2px 4px rgba(0, 0, 0, .15));
         }
 
-        /* Floating hearts */
         @keyframes floatHeart {
             0% {
                 transform: translateY(100%) scale(.85);
@@ -375,7 +364,6 @@
             left: var(--x);
         }
 
-        /* Glow */
         .glow {
             position: absolute;
             width: 560px;
@@ -393,7 +381,7 @@
 <body class="flex flex-col items-center justify-center min-h-screen">
 
     <div class="glow"></div>
-    <!-- Background image mờ -->
+
     <div style="position:fixed; inset:0; z-index:-2; pointer-events:none;">
         <img src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?q=80&w=1600&auto=format&fit=crop"
             alt="bg" style="width:100vw; height:100vh; object-fit:cover; opacity:0.18; filter: blur(6px);" />
@@ -424,7 +412,6 @@
                         <div class="grid gap-4 sm:grid-cols-3 my-5">
                             <img class="photo h-40 w-full object-cover" src="img/anh1.jpg" alt="Kỷ niệm 1">
                             <img class="photo h-40 w-full object-cover" src="img/anh2.jpg" alt="Kỷ niệm 2">
-                            <!-- <img class="photo h-40 w-full object-cover" src="img/anh3.jpg" alt="Kỷ niệm 3"> -->
                         </div>
                         <div class="mt-6 mb-2 floral-row" aria-hidden="true">
                             <svg class="flower" viewBox="0 0 24 24">
@@ -464,7 +451,6 @@
     <footer class="text-xs text-rose-600/70 mt-8"></footer>
 
     <script>
-        // Floating hearts
         for (let i = 0; i < 28; i++) {
             const h = document.createElement("div");
             h.className = "heart"; h.textContent = "❤️";
@@ -481,12 +467,9 @@
             if (!opened) {
                 env.classList.add("open");
                 opened = true;
-                // sparkle nhẹ lúc mở
                 setTimeout(() => createSparkles(env), 300);
-                // Hiệu ứng trái tim bay lên
                 createFlyingHearts(env);
             }
-            // Hiệu ứng trái tim bay lên khi mở thư
             function createFlyingHearts(el) {
                 for (let i = 0; i < 14; i++) {
                     const heart = document.createElement("div");
@@ -514,21 +497,15 @@
         }
         function closeLetter() {
             if (opened) {
-                // chỉ cần bỏ class 'open' là: 
-                // - flap gập lại
-                // - .letter hạ chiều cao về 0 (thu vào)
-                // - .content tự mờ dần + trượt xuống (do CSS chuyển trạng thái)
                 env.classList.remove("open");
                 opened = false;
             }
         }
 
-        // Click envelope để toggle mở/đóng (kể cả khi click vào nội dung)
         env.addEventListener("click", () => {
             opened ? closeLetter() : openLetter();
         });
 
-        // Sparkles
         function createSparkles(el) {
             for (let i = 0; i < 22; i++) {
                 const s = document.createElement("div");
